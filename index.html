@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Танюши ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .section {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .section.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Первая страница */
+        .language-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .heart {
+            color: #e74c3c;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        select {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: 2px solid #764ba2;
+            border-radius: 10px;
+            background: white;
+            color: #764ba2;
+            cursor: pointer;
+            margin: 20px 0;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        select:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .photo-container {
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .photo-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Вторая страница - небо */
+        .sky-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .sky-container h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .sky-photo {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .sky-photo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Третья страница - 100 причин */
+        .reasons-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .reasons-container h2 {
+            color: #764ba2;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .reasons-list {
+            list-style: none;
+        }
+
+        .reasons-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            transition: transform 0.3s;
+        }
+
+        .reasons-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .reasons-list li::before {
+            content: "💖 ";
+        }
+
+        /* Четвертая страница - галерея */
+        .gallery-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .gallery-container h2 {
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .gallery {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gallery-img {
+            display: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-img.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .gallery-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .gallery-nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .gallery-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .gallery-btn:hover {
+            background: #667eea;
+            transform: scale(1.05);
+        }
+
+        .photo-counter {
+            margin-top: 15px;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        /* Финальная страница */
+        .final-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .big-heart {
+            font-size: 8em;
+            color: #e74c3c;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        .final-text {
+            font-size: 2.5em;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .hearts {
+            font-size: 2em;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .big-heart { font-size: 5em; }
+            .final-text { font-size: 1.8em; }
+            .language-container, .sky-container, .reasons-container, .gallery-container {
+                padding: 25px;
+            }
+        }
+
+        /* Скроллбар для причин */
+        .reasons-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .reasons-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .reasons-container::-webkit-scrollbar-thumb {
+            background: #764ba2;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Страница 1: Приветствие -->
+    <div class="section active" id="section1">
+        <div class="language-container">
+            <h1 id="loveText">Я люблю тебя, Танюша <span class="heart">❤️</span></h1>
+            
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫 Français</option>
+                <option value="de">🇩 Deutsch</option>
+                <option value="it">🇮 Italiano</option>
+                <option value="pt">🇵 Português</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="hi">🇮 हिन्दी</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="pl">🇵 Polski</option>
+            </select>
+
+            <div class="photo-container">
+                <!-- Замени на свою фотографию -->
+                <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Твое+фото" alt="Наше фото" id="mainPhoto">
+            </div>
+
+            <button class="btn" onclick="nextSection(2)">Далее →</button>
+        </div>
+    </div>
+
+    <!-- Страница 2: Звёздное небо -->
+    <div class="section" id="section2">
+        <div class="sky-container">
+            <h2>Так выглядело небо в день, когда мы начали встречаться ✨</h2>
+            <div class="sky-photo">
+                <!-- Замени на фото звёздного неба -->
+                <img src="https://via.placeholder.com/600x400/1a1a2e/ffffff?text=Звёздное+небо" alt="Звёздное небо">
+            </div>
+            <br><br>
+            <button class="btn" onclick="nextSection(3)">Далее →</button>
+        </div>
+    </div>
+
+    <!-- Страница 3: 100 причин -->
+    <div class="section" id="section3">
+        <div class="reasons-container">
+            <h2>100 причин, почему я тебя люблю 💕</h2>
+            <ul class="reasons-list" id="reasonsList">
+                <!-- Причины будут добавлены через JS -->
+            </ul>
+            <br>
+            <button class="btn" onclick="nextSection(4)">Далее →</button>
+        </div>
+    </div>
+
+    <!-- Страница 4: Галерея -->
+    <div class="section" id="section4">
+        <div class="gallery-container">
+            <h2>Наши моменты 📸</h2>
+            <div class="gallery" id="gallery">
+                <div class="gallery-img active">
+                    <img src="https://via.placeholder.com/600x400/667eea/ffffff?text=Фото+1" alt="Фото 1">
+                </div>
+                <div class="gallery-img">
+                    <img src="https://via.placeholder.com/600x400/764ba2/ffffff?text=Фото+2" alt="Фото 2">
+                </div>
+                <div class="gallery-img">
+                    <img src="https://via.placeholder.com/600x400/e74c3c/ffffff?text=Фото+3" alt="Фото 3">
+                </div>
+                <div class="gallery-img">
+                    <img src="https://via.placeholder.com/600x400/f39c12/ffffff?text=Фото+4" alt="Фото 4">
+                </div>
+                <div class="gallery-img">
+                    <img src="https://via.placeholder.com/600x400/1abc9c/ffffff?text=Фото+5" alt="Фото 5">
+                </div>
+            </div>
+            <div class="gallery-nav">
+                <button class="gallery-btn" onclick="changePhoto(-1)">← Назад</button>
+                <button class="gallery-btn" onclick="changePhoto(1)">Вперёд →</button>
+            </div>
+            <div class="photo-counter" id="photoCounter">1 / 5</div>
+            <br><br>
+            <button class="btn" onclick="nextSection(5)">Далее →</button>
+        </div>
+    </div>
+
+    <!-- Страница 5: Финал -->
+    <div class="section" id="section5">
+        <div class="final-container">
+            <div class="final-text">Я тебя очень люблю, моя девочка</div>
+            <div class="hearts">❤️❤️❤️</div>
+            <br><br>
+            <button class="btn" onclick="nextSection(1)">Начать сначала 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        // Переводы
+        const translations = {
+            ru: "Я люблю тебя, Танюша",
+            en: "I love you, Tanyusha",
+            es: "Te amo, Tanyusha",
+            fr: "Je t'aime, Tanyusha",
+            de: "Ich liebe dich, Tanyusha",
+            it: "Ti amo, Tanyusha",
+            pt: "Eu te amo, Tanyusha",
+            zh: "我爱你，Tanyusha",
+            ja: "愛してる、Tanyusha",
+            ko: "사랑해, Tanyusha",
+            ar: "أحبك، Tanyusha",
+            hi: "मैं तुमसे प्यार करता हूँ, Tanyusha",
+            tr: "Seni seviyorum, Tanyusha",
+            pl: "Kocham cię, Tanyusha"
+        };
+
+        // 100 причин
+        const reasons = [
+            "Ты делаешь мой мир ярче",
+            "Твоя улыбка освещает мой день",
+            "Ты понимаешь меня без слов",
+            "Ты вдохновляешь меня становиться лучше",
+            "Твой смех",
+            "Ты веришь в меня, даже когда я сомневаюсь",
+            "С тобой каждый день идеальный",
+            "Ты делаешь обычные моменты особенными",
+            "Твоя поддержка даёт мне силы",
+            "Ты самая красивая девушка на свете",
+            "Ты заботливая и нежная",
+            "С тобой я могу быть самим собой",
+            "Ты умная и интересная",
+            "Ты делаешь меня счастливым",
+            "Твои глаза полны доброты",
+            "Ты всегда знаешь, что сказать",
+            "Ты делаешь мир лучше",
+            "Ты моя лучшая подруга",
+            "Ты моя самая большая поддержка",
+            "Ты понимаешь мои шутки",
+            "Ты терпеливая со мной",
+            "Ты вдохновляешь меня",
+            "Ты делаешь меня лучше",
+            "Ты моя мечта, ставшая реальностью",
+            "Ты наполняешь мою жизнь смыслом",
+            "Ты самая удивительная девушка",
+            "Ты делаешь каждое мгновение особенным",
+            "Ты моя радость",
+            "Ты моё счастье",
+            "Ты моя любовь",
+            "Ты моя вселенная",
+            "Ты моё всё",
+            "Ты незаменимая",
+            "Ты уникальная",
+            "Ты особенная",
+            "Ты прекрасна внутри и снаружи",
+            "Ты сильная и независимая",
+            "Ты нежная и заботливая",
+            "Ты весёлая и жизнерадостная",
+            "Ты мудрая и рассудительная",
+            "Ты творческая и креативная",
+            "Ты целеустремлённая",
+            "Ты амбициозная",
+            "Ты талантливая",
+            "Ты обаятельная",
+            "Ты харизматичная",
+            "Ты искренняя",
+            "Ты честная",
+            "Ты надёжная",
+            "Ты верная",
+            "Ты преданная",
+            "Ты понимающая",
+            "Ты сострадательная",
+            "Ты добрая",
+            "Ты щедрая",
+            "Ты благодарная",
+            "Ты оптимистичная",
+            "Ты позитивная",
+            "Ты энергичная",
+            "Ты страстная",
+            "Ты романтичная",
+            "Ты чувственная",
+            "Ты женственная",
+            "Ты элегантная",
+            "Ты стильная",
+            "Ты модная",
+            "Ты современная",
+            "Ты прогрессивная",
+            "Ты открытая новому",
+            "Ты любознательная",
+            "Ты начитанная",
+            "Ты образованная",
+            "Ты эрудированная",
+            "Ты остроумная",
+            "Ты находчивая",
+            "Ты изобретательная",
+            "Ты практичная",
+            "Ты организованная",
+            "Ты ответственная",
+            "Ты аккуратная",
+            "Ты дружелюбная",
+            "Ты приветливая",
+            "Ты улыбчивая",
+            "Ты жизнерадостная",
+            "Ты весёлая",
+            "Ты игривая",
+            "Ты непосредственная",
+            "Ты естественная",
+            "Ты настоящая",
+            "Ты крутая",
+            "Ты индивидуальная",
+            "Ты ты",
+            "Ты моя",
+            "Я люблю тебя такой, какая ты есть",
+            "Я благодарен судьбе за тебя",
+            "Ты лучшее, что случилось со мной",
+            "Я хочу провести с тобой всю жизнь",
+            "Ты моя судьба",
+            "Ты моя вторая половинка",
+            "Ты моя любовь"
+        ];
+
+        // Переключение секций
+        function nextSection(sectionNum) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('section' + sectionNum).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Смена языка
+        function changeLanguage() {
+            const select = document.getElementById('languageSelect');
+            const lang = select.value;
+            const loveText = document.getElementById('loveText');
+            loveText.innerHTML = translations[lang] + ' <span class="heart">❤️</span>';
+        }
+
+        // Генерация списка причин
+        function generateReasons() {
+            const list = document.getElementById('reasonsList');
+            reasons.forEach((reason, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${index + 1}. ${reason}`;
+                list.appendChild(li);
+            });
+        }
+
+        // Галерея
+        let currentPhoto = 0;
+        const photos = document.querySelectorAll('.gallery-img');
+        const totalPhotos = photos.length;
+
+        function changePhoto(direction) {
+            photos[currentPhoto].classList.remove('active');
+            currentPhoto += direction;
+            
+            if (currentPhoto >= totalPhotos) currentPhoto = 0;
+            if (currentPhoto < 0) currentPhoto = totalPhotos - 1;
+            
+            photos[currentPhoto].classList.add('active');
+            document.getElementById('photoCounter').textContent = `${currentPhoto + 1} / ${totalPhotos}`;
+        }
+
+        // Инициализация
+        generateReasons();
+
+        // Добавляем плавную прокрутку
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
