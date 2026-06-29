@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Marck+Script&display=swap" rel="stylesheet">
     <title>Для Танюши ❤️</title>
     <style>
         * {
@@ -285,6 +286,83 @@
         .hearts {
             font-size: 2em;
             animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        /* Страница с письмом */
+        .letter-container {
+            background: linear-gradient(135deg, #fdfcfb 0%, #f5e6d3 100%);
+            padding: 60px 50px;
+            border-radius: 10px;
+            max-width: 700px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.3),
+                inset 0 0 80px rgba(139, 90, 43, 0.08);
+            position: relative;
+            border: 1px solid rgba(139, 90, 43, 0.2);
+            background-image: 
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 39px,
+                    rgba(139, 90, 43, 0.1) 39px,
+                    rgba(139, 90, 43, 0.1) 40px
+                );
+        }
+        
+        .letter-container::before {
+            content: "💌";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            background: white;
+            padding: 0 15px;
+            border-radius: 50%;
+        }
+        
+        .letter-title {
+            font-family: 'Marck Script', cursive;
+            color: #8b5a2b;
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(139, 90, 43, 0.2);
+        }
+        
+        .letter-text {
+            font-family: 'Caveat', cursive;
+            color: #3d2817;
+            font-size: 1.6em;
+            line-height: 2.2;
+            text-align: left;
+            white-space: pre-wrap;
+            padding: 20px 10px;
+        }
+        
+        .letter-signature {
+            font-family: 'Marck Script', cursive;
+            color: #8b5a2b;
+            font-size: 2em;
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Адаптивность для письма */
+        @media (max-width: 600px) {
+            .letter-container {
+                padding: 40px 25px;
+            }
+            .letter-title {
+                font-size: 2em;
+            }
+            .letter-text {
+                font-size: 1.3em;
+                line-height: 2;
+            }
+            .letter-signature {
+                font-size: 1.5em;
+            }
         }
 
         /* Адаптивность */
